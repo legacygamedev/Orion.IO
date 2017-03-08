@@ -1,0 +1,3 @@
+[submodule "lib\\lidgren"]
+	path = lib\\lidgren
+	url = https://github.com/pandacoder/lidgren-network-gen3.git
