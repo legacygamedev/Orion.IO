@@ -23,11 +23,12 @@ SOFTWARE.
 */
 
 using Lidgren.Network;
+using System.Net;
 
 namespace Orion.IO.Network.Lidgren
 {
     public interface ILidgrenNetwork<T> : INetwork<LidgrenConnection> where T : NetPeer
     {
-        T Peer { get; set; }
+        T Peer { get; }
     }
 }

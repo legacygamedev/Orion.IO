@@ -25,10 +25,12 @@ SOFTWARE.
 using Lidgren.Network;
 using System;
 using Orion.IO.Network.Packets;
+using System.Threading;
+using System.Collections.Concurrent;
 
 namespace Orion.IO.Network.Lidgren
 {
-    public class LidgrenConnection : IConnection
+    public abstract class LidgrenConnection : IConnection
     {
         public Guid Guid { get; private set; }
 
@@ -65,6 +67,20 @@ namespace Orion.IO.Network.Lidgren
 
         public NetConnection Connection { get; private set; }
 
+        private BlockingCollection<NetIncomingMessage> mMessageQueue;
+        protected BlockingCollection<NetIncomingMessage> MessageQueue
+        {
+            get
+            {
+                if (mMessageQueue == null)
+                {
+                    mMessageQueue = new BlockingCollection<NetIncomingMessage>(1);
+                }
+
+                return mMessageQueue;
+            }
+        }
+
         public LidgrenConnection(NetConnection connection) : this(Guid.NewGuid(), connection) {
             /* Do nothing */
         }
@@ -75,7 +91,7 @@ namespace Orion.IO.Network.Lidgren
             Connection = connection;
         }
 
-        public bool Kill(string message = null)
+        public virtual bool Kill(string message = null)
         {
             if (Connection.Status != NetConnectionStatus.Disconnected && Connection.Status != NetConnectionStatus.Disconnecting)
             {
@@ -86,7 +102,7 @@ namespace Orion.IO.Network.Lidgren
             return false;
         }
 
-        public bool Send<T>(T? packet) where T : struct, IBarePacket<T>
+        public virtual bool Send<T>(T? packet) where T : struct, IBarePacket<T>
         {
             if (packet.HasValue)
             {
@@ -98,6 +114,13 @@ namespace Orion.IO.Network.Lidgren
             }
 
             return false;
+        }
+
+        protected abstract void ProcessMessages();
+
+        public void QueueMessage(NetIncomingMessage message)
+        {
+            MessageQueue.Add(message);
         }
     }
 }

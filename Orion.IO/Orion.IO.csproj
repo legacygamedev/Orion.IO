@@ -56,10 +56,12 @@
     <Compile Include="Network\ConnectionStatistics.cs" />
     <Compile Include="Network\IConnection.cs" />
     <Compile Include="Network\IPacketSerializer.cs" />
+    <Compile Include="Network\Lidgren\AbstractLidgrenNetwork.cs" />
     <Compile Include="Network\Lidgren\LidgrenClient.cs" />
     <Compile Include="Network\Lidgren\ILidgrenNetwork.cs" />
     <Compile Include="Network\Lidgren\ILidgrenNetwork.Generic.cs" />
     <Compile Include="Network\Lidgren\LidgrenConnection.cs" />
+    <Compile Include="Network\Lidgren\LidgrenNetwork.Events.cs" />
     <Compile Include="Network\Lidgren\LidgrenPacketSerializer.cs" />
     <Compile Include="Network\Lidgren\LidgrenServer.cs" />
     <Compile Include="Network\NetworkOptions.cs" />

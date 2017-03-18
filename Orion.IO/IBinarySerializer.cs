@@ -73,6 +73,7 @@ namespace Orion.IO
         void Write(sbyte value, long position = -1);
         void Write(short value, long position = -1);
         void Write(uint value, long position = -1);
+        void Write(ulong value, long position = -1);
         void Write(ushort value, long position = -1);
         void Write(string value, long position = -1);
     }

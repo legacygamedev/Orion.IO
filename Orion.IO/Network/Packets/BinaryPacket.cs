@@ -42,6 +42,8 @@ namespace Orion.IO.Network.Packets
             }
         }
 
+        public long Length { get { return mBuffer.Length; } }
+
         public BinaryPacket(IConnection sender)
         {
             Sender = sender;
@@ -284,6 +286,11 @@ namespace Orion.IO.Network.Packets
         }
 
         public void Write(uint value, long position = -1)
+        {
+            Buffer.Write(value, position);
+        }
+
+        public void Write(ulong value, long position = -1)
         {
             Buffer.Write(value, position);
         }

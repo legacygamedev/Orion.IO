@@ -26,6 +26,7 @@ namespace Orion.IO.Network
 {
     public struct NetworkOptions
     {
+        public string Identifier;
         public string Host;
         public ushort Port;
         public ushort ClientLimit;

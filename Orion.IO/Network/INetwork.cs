@@ -22,11 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using System.Net;
+
 namespace Orion.IO.Network
 {
     public interface INetwork<T> where T : IConnection
     {
-        NetworkOptions Options { get; set; }
+        NetworkOptions Options { get; }
+
+        IPAddress LocalIP { get; }
 
         bool IsRunning { get; }
 

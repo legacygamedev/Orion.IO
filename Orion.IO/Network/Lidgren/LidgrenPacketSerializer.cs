@@ -30,11 +30,11 @@ namespace Orion.IO.Network.Lidgren
 {
     public class LidgrenPacketSerializer : IPacketSerializer
     {
-        private NetBuffer mMessage;
+        public NetBuffer Message { get; set; }
 
         public LidgrenPacketSerializer(NetBuffer message)
         {
-            mMessage = message;
+            Message = message;
         }
 
         public bool Read(ref bool value, long position = -1)
@@ -44,7 +44,7 @@ namespace Orion.IO.Network.Lidgren
 
         public byte Read(ref byte value, long position = -1)
         {
-            if (!mMessage.ReadByte(out value))
+            if (!Message.ReadByte(out value))
             {
                 throw new AccessViolationException();
             }
@@ -59,7 +59,7 @@ namespace Orion.IO.Network.Lidgren
 
         public byte[] Read(ref byte[] value, int length, long position = -1)
         {
-            if (!mMessage.ReadBytes(length, out value))
+            if (!Message.ReadBytes(length, out value))
             {
                 throw new AccessViolationException();
             }
@@ -89,7 +89,7 @@ namespace Orion.IO.Network.Lidgren
 
         public int Read(ref int value, long position = -1)
         {
-            if (!mMessage.ReadInt32(out value))
+            if (!Message.ReadInt32(out value))
             {
                 throw new AccessViolationException();
             }
@@ -114,7 +114,7 @@ namespace Orion.IO.Network.Lidgren
 
         public uint Read(ref uint value, long position = -1)
         {
-            if (!mMessage.ReadUInt32(out value))
+            if (!Message.ReadUInt32(out value))
             {
                 throw new AccessViolationException();
             }
@@ -139,12 +139,12 @@ namespace Orion.IO.Network.Lidgren
 
         public bool ReadBool(long position = -1)
         {
-            return mMessage.ReadBoolean();
+            return Message.ReadBoolean();
         }
 
         public byte ReadByte(long position = -1)
         {
-            return mMessage.ReadByte();
+            return Message.ReadByte();
         }
 
         public byte[] ReadBytes(long position = -1)
@@ -154,7 +154,7 @@ namespace Orion.IO.Network.Lidgren
 
         public byte[] ReadBytes(int length, long position = -1)
         {
-            return mMessage.ReadBytes(length);
+            return Message.ReadBytes(length);
         }
 
         public char ReadChar(long position = -1)
@@ -175,32 +175,32 @@ namespace Orion.IO.Network.Lidgren
 
         public double ReadDouble(long position = -1)
         {
-            return mMessage.ReadDouble();
+            return Message.ReadDouble();
         }
 
         public float ReadFloat(long position = -1)
         {
-            return mMessage.ReadFloat();
+            return Message.ReadFloat();
         }
 
         public int ReadInt(long position = -1)
         {
-            return mMessage.ReadInt32();
+            return Message.ReadInt32();
         }
 
         public long ReadLong(long position = -1)
         {
-            return mMessage.ReadInt64();
+            return Message.ReadInt64();
         }
 
         public sbyte ReadSByte(long position = -1)
         {
-            return mMessage.ReadSByte();
+            return Message.ReadSByte();
         }
 
         public short ReadShort(long position = -1)
         {
-            return mMessage.ReadInt16();
+            return Message.ReadInt16();
         }
 
         public string ReadString(long position = -1)
@@ -210,92 +210,106 @@ namespace Orion.IO.Network.Lidgren
 
         public uint ReadUInt(long position = -1)
         {
-            return mMessage.ReadUInt32();
+            return Message.ReadUInt32();
         }
 
         public ulong ReadULong(long position = -1)
         {
-            return mMessage.ReadUInt64();
+            return Message.ReadUInt64();
         }
 
         public ushort ReadUShort(long position = -1)
         {
-            return mMessage.ReadUInt16();
+            return Message.ReadUInt16();
         }
 
         public void Write(bool value, long position = -1)
         {
-            mMessage.Write(value);
+            Message.Write(value);
         }
 
         public void Write(byte value, long position = -1)
         {
-            mMessage.Write(value);
+            Message.Write(value);
         }
 
         public void Write(byte[] value, long position = -1)
         {
-            mMessage.Write(value);
+            Message.Write(value.Length);
+            Write(value, value.Length, position);
         }
 
         public void Write(byte[] value, int length, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value, 0, length);
         }
 
         public void Write(char value, long position = -1)
         {
-            throw new NotImplementedException();
+            Write(BitConverter.GetBytes(value), 2, position);
         }
 
         public void Write(decimal value, long position = -1)
         {
-            throw new NotImplementedException();
+            var intBuffer = decimal.GetBits(value);
+
+            var bytes = new byte[16];
+            Buffer.BlockCopy(BitConverter.GetBytes(intBuffer[0]), 0, bytes, 0, 4);
+            Buffer.BlockCopy(BitConverter.GetBytes(intBuffer[1]), 0, bytes, 4, 4);
+            Buffer.BlockCopy(BitConverter.GetBytes(intBuffer[2]), 0, bytes, 8, 4);
+            Buffer.BlockCopy(BitConverter.GetBytes(intBuffer[3]), 0, bytes, 12, 4);
+
+            Write(bytes, sizeof(int) * 4, position);
         }
 
         public void Write(double value, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value);
         }
 
         public void Write(float value, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value);
         }
 
         public void Write(int value, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value);
         }
 
         public void Write(long value, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value);
         }
 
         public void Write(sbyte value, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value);
         }
 
         public void Write(short value, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value);
         }
 
         public void Write(uint value, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value);
+        }
+
+        public void Write(ulong value, long position = -1)
+        {
+            Message.Write(value);
         }
 
         public void Write(ushort value, long position = -1)
         {
-            throw new NotImplementedException();
+            Message.Write(value);
         }
 
         public void Write(string value, long position = -1)
         {
-            throw new NotImplementedException();
+            Write(Encoding.UTF8.GetBytes(value), position);
         }
     }
 }
