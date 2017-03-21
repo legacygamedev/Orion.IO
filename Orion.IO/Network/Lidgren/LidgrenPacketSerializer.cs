@@ -1,4 +1,4 @@
-﻿/*
+/*
 MIT License
 
 Copyright (c) 2017 Robert Lodico
@@ -37,12 +37,12 @@ namespace Orion.IO.Network.Lidgren
             Message = message;
         }
 
-        public bool Read(ref bool value, long position = -1)
+        public bool Read(ref bool value)
         {
-            return (value = ReadBool(position));
+            return (value = ReadBool());
         }
 
-        public byte Read(ref byte value, long position = -1)
+        public byte Read(ref byte value)
         {
             if (!Message.ReadByte(out value))
             {
@@ -52,12 +52,12 @@ namespace Orion.IO.Network.Lidgren
             return value;
         }
 
-        public byte[] Read(ref byte[] value, long position = -1)
+        public byte[] Read(ref byte[] value)
         {
-            return Read(ref value, ReadInt(position), (position > -1) ? position + 4 : position);
+            return Read(ref value, ReadInt(), ( > -1) ? + 4 :);
         }
 
-        public byte[] Read(ref byte[] value, int length, long position = -1)
+        public byte[] Read(ref byte[] value, int length)
         {
             if (!Message.ReadBytes(length, out value))
             {
@@ -67,27 +67,27 @@ namespace Orion.IO.Network.Lidgren
             return value;
         }
 
-        public char Read(ref char value, long position = -1)
+        public char Read(ref char value)
         {
-            return (value = ReadChar(position));
+            return (value = ReadChar());
         }
 
-        public decimal Read(ref decimal value, long position = -1)
+        public decimal Read(ref decimal value)
         {
-            return (value = ReadDecimal(position));
+            return (value = ReadDecimal());
         }
 
-        public double Read(ref double value, long position = -1)
+        public double Read(ref double value)
         {
-            return (value = ReadDouble(position));
+            return (value = ReadDouble());
         }
 
-        public float Read(ref float value, long position = -1)
+        public float Read(ref float value)
         {
-            return (value = ReadFloat(position));
+            return (value = ReadFloat());
         }
 
-        public int Read(ref int value, long position = -1)
+        public int Read(ref int value)
         {
             if (!Message.ReadInt32(out value))
             {
@@ -97,22 +97,22 @@ namespace Orion.IO.Network.Lidgren
             return value;
         }
 
-        public long Read(ref long value, long position = -1)
+        public long Read(ref long value)
         {
-            return (value = ReadLong(position));
+            return (value = ReadLong());
         }
 
-        public sbyte Read(ref sbyte value, long position = -1)
+        public sbyte Read(ref sbyte value)
         {
-            return (value = ReadSByte(position));
+            return (value = ReadSByte());
         }
 
-        public short Read(ref short value, long position = -1)
+        public short Read(ref short value)
         {
-            return (value = ReadShort(position));
+            return (value = ReadShort());
         }
 
-        public uint Read(ref uint value, long position = -1)
+        public uint Read(ref uint value)
         {
             if (!Message.ReadUInt32(out value))
             {
@@ -122,49 +122,49 @@ namespace Orion.IO.Network.Lidgren
             return value;
         }
 
-        public ulong Read(ref ulong value, long position = -1)
+        public ulong Read(ref ulong value)
         {
-            return (value = ReadULong(position));
+            return (value = ReadULong());
         }
 
-        public ushort Read(ref ushort value, long position = -1)
+        public ushort Read(ref ushort value)
         {
-            return (value = ReadUShort(position));
+            return (value = ReadUShort());
         }
 
-        public string Read(ref string value, long position = -1)
+        public string Read(ref string value)
         {
-            return (value = ReadString(position));
+            return (value = ReadString());
         }
 
-        public bool ReadBool(long position = -1)
+        public bool ReadBool()
         {
             return Message.ReadBoolean();
         }
 
-        public byte ReadByte(long position = -1)
+        public byte ReadByte()
         {
             return Message.ReadByte();
         }
 
-        public byte[] ReadBytes(long position = -1)
+        public byte[] ReadBytes()
         {
-            return ReadBytes(ReadInt(position), (position > -1) ? position + 4 : position);
+            return ReadBytes(ReadInt(), ( > -1) ? + 4 :);
         }
 
-        public byte[] ReadBytes(int length, long position = -1)
+        public byte[] ReadBytes(int length)
         {
             return Message.ReadBytes(length);
         }
 
-        public char ReadChar(long position = -1)
+        public char ReadChar()
         {
-            return BitConverter.ToChar(ReadBytes(sizeof(char), position), 0);
+            return BitConverter.ToChar(ReadBytes(sizeof(char)), 0);
         }
 
-        public decimal ReadDecimal(long position = -1)
+        public decimal ReadDecimal()
         {
-            var bytes = ReadBytes(16, position);
+            var bytes = ReadBytes(16);
             return new decimal(new int[] {
                 BitConverter.ToInt32(bytes, 0),
                 BitConverter.ToInt32(bytes, 4),
@@ -173,83 +173,83 @@ namespace Orion.IO.Network.Lidgren
             });
         }
 
-        public double ReadDouble(long position = -1)
+        public double ReadDouble()
         {
             return Message.ReadDouble();
         }
 
-        public float ReadFloat(long position = -1)
+        public float ReadFloat()
         {
             return Message.ReadFloat();
         }
 
-        public int ReadInt(long position = -1)
+        public int ReadInt()
         {
             return Message.ReadInt32();
         }
 
-        public long ReadLong(long position = -1)
+        public long ReadLong()
         {
             return Message.ReadInt64();
         }
 
-        public sbyte ReadSByte(long position = -1)
+        public sbyte ReadSByte()
         {
             return Message.ReadSByte();
         }
 
-        public short ReadShort(long position = -1)
+        public short ReadShort()
         {
             return Message.ReadInt16();
         }
 
-        public string ReadString(long position = -1)
+        public string ReadString()
         {
-            return Encoding.UTF8.GetString(ReadBytes(position));
+            return Encoding.UTF8.GetString(ReadBytes());
         }
 
-        public uint ReadUInt(long position = -1)
+        public uint ReadUInt()
         {
             return Message.ReadUInt32();
         }
 
-        public ulong ReadULong(long position = -1)
+        public ulong ReadULong()
         {
             return Message.ReadUInt64();
         }
 
-        public ushort ReadUShort(long position = -1)
+        public ushort ReadUShort()
         {
             return Message.ReadUInt16();
         }
 
-        public void Write(bool value, long position = -1)
+        public void Write(bool value)
         {
             Message.Write(value);
         }
 
-        public void Write(byte value, long position = -1)
+        public void Write(byte value)
         {
             Message.Write(value);
         }
 
-        public void Write(byte[] value, long position = -1)
+        public void Write(byte[] value)
         {
             Message.Write(value.Length);
-            Write(value, value.Length, position);
+            Write(value, value.Length);
         }
 
-        public void Write(byte[] value, int length, long position = -1)
+        public void Write(byte[] value, int length)
         {
             Message.Write(value, 0, length);
         }
 
-        public void Write(char value, long position = -1)
+        public void Write(char value)
         {
-            Write(BitConverter.GetBytes(value), 2, position);
+            Write(BitConverter.GetBytes(value), 2);
         }
 
-        public void Write(decimal value, long position = -1)
+        public void Write(decimal value)
         {
             var intBuffer = decimal.GetBits(value);
 
@@ -259,57 +259,57 @@ namespace Orion.IO.Network.Lidgren
             Buffer.BlockCopy(BitConverter.GetBytes(intBuffer[2]), 0, bytes, 8, 4);
             Buffer.BlockCopy(BitConverter.GetBytes(intBuffer[3]), 0, bytes, 12, 4);
 
-            Write(bytes, sizeof(int) * 4, position);
+            Write(bytes, sizeof(int) * 4);
         }
 
-        public void Write(double value, long position = -1)
+        public void Write(double value)
         {
             Message.Write(value);
         }
 
-        public void Write(float value, long position = -1)
+        public void Write(float value)
         {
             Message.Write(value);
         }
 
-        public void Write(int value, long position = -1)
+        public void Write(int value)
         {
             Message.Write(value);
         }
 
-        public void Write(long value, long position = -1)
+        public void Write(long value)
         {
             Message.Write(value);
         }
 
-        public void Write(sbyte value, long position = -1)
+        public void Write(sbyte value)
         {
             Message.Write(value);
         }
 
-        public void Write(short value, long position = -1)
+        public void Write(short value)
         {
             Message.Write(value);
         }
 
-        public void Write(uint value, long position = -1)
+        public void Write(uint value)
         {
             Message.Write(value);
         }
 
-        public void Write(ulong value, long position = -1)
+        public void Write(ulong value)
         {
             Message.Write(value);
         }
 
-        public void Write(ushort value, long position = -1)
+        public void Write(ushort value)
         {
             Message.Write(value);
         }
 
-        public void Write(string value, long position = -1)
+        public void Write(string value)
         {
-            Write(Encoding.UTF8.GetBytes(value), position);
+            Write(Encoding.UTF8.GetBytes(value));
         }
     }
 }
