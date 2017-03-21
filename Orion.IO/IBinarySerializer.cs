@@ -1,4 +1,4 @@
-﻿/*
+/*
 MIT License
 
 Copyright (c) 2017 Robert Lodico
@@ -26,55 +26,55 @@ namespace Orion.IO
 {
     public interface IBinarySerializer
     {
-        bool ReadBool(long position = -1);
-        byte ReadByte(long position = -1);
-        byte[] ReadBytes(long position = -1);
-        byte[] ReadBytes(int length, long position = -1);
-        char ReadChar(long position = -1);
-        decimal ReadDecimal(long position = -1);
-        double ReadDouble(long position = -1);
-        float ReadFloat(long position = -1);
-        int ReadInt(long position = -1);
-        long ReadLong(long position = -1);
-        sbyte ReadSByte(long position = -1);
-        short ReadShort(long position = -1);
-        uint ReadUInt(long position = -1);
-        ulong ReadULong(long position = -1);
-        ushort ReadUShort(long position = -1);
-        string ReadString(long position = -1);
+        bool ReadBool();
+        byte ReadByte();
+        byte[] ReadBytes();
+        byte[] ReadBytes(int length);
+        char ReadChar();
+        decimal ReadDecimal();
+        double ReadDouble();
+        float ReadFloat();
+        int ReadInt();
+        long ReadLong();
+        sbyte ReadSByte();
+        short ReadShort();
+        uint ReadUInt();
+        ulong ReadULong();
+        ushort ReadUShort();
+        string ReadString();
 
-        bool Read(ref bool value, long position = -1);
-        byte Read(ref byte value, long position = -1);
-        byte[] Read(ref byte[] value, long position = -1);
-        byte[] Read(ref byte[] value, int length, long position = -1);
-        char Read(ref char value, long position = -1);
-        decimal Read(ref decimal value, long position = -1);
-        double Read(ref double value, long position = -1);
-        float Read(ref float value, long position = -1);
-        int Read(ref int value, long position = -1);
-        long Read(ref long value, long position = -1);
-        sbyte Read(ref sbyte value, long position = -1);
-        short Read(ref short value, long position = -1);
-        uint Read(ref uint value, long position = -1);
-        ulong Read(ref ulong value, long position = -1);
-        ushort Read(ref ushort value, long position = -1);
-        string Read(ref string value, long position = -1);
+        bool Read(ref bool value);
+        byte Read(ref byte value);
+        byte[] Read(ref byte[] value);
+        byte[] Read(ref byte[] value, int length);
+        char Read(ref char value);
+        decimal Read(ref decimal value);
+        double Read(ref double value);
+        float Read(ref float value);
+        int Read(ref int value);
+        long Read(ref long value);
+        sbyte Read(ref sbyte value);
+        short Read(ref short value);
+        uint Read(ref uint value);
+        ulong Read(ref ulong value);
+        ushort Read(ref ushort value);
+        string Read(ref string value);
 
-        void Write(bool value, long position = -1);
-        void Write(byte value, long position = -1);
-        void Write(byte[] value, long position = -1);
-        void Write(byte[] value, int length, long position = -1);
-        void Write(char value, long position = -1);
-        void Write(decimal value, long position = -1);
-        void Write(double value, long position = -1);
-        void Write(float value, long position = -1);
-        void Write(int value, long position = -1);
-        void Write(long value, long position = -1);
-        void Write(sbyte value, long position = -1);
-        void Write(short value, long position = -1);
-        void Write(uint value, long position = -1);
-        void Write(ulong value, long position = -1);
-        void Write(ushort value, long position = -1);
-        void Write(string value, long position = -1);
+        void Write(bool value);
+        void Write(byte value);
+        void Write(byte[] value);
+        void Write(byte[] value, int length);
+        void Write(char value);
+        void Write(decimal value);
+        void Write(double value);
+        void Write(float value);
+        void Write(int value);
+        void Write(long value);
+        void Write(sbyte value);
+        void Write(short value);
+        void Write(uint value);
+        void Write(ulong value);
+        void Write(ushort value);
+        void Write(string value);
     }
 }
