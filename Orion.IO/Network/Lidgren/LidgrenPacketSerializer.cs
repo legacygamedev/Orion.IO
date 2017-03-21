@@ -54,7 +54,7 @@ namespace Orion.IO.Network.Lidgren
 
         public byte[] Read(ref byte[] value)
         {
-            return Read(ref value, ReadInt(), ( > -1) ? + 4 :);
+            return Read(ref value, ReadInt());
         }
 
         public byte[] Read(ref byte[] value, int length)
