@@ -149,7 +149,7 @@ namespace Orion.IO.Network.Lidgren
 
         public byte[] ReadBytes()
         {
-            return ReadBytes(ReadInt(), ( > -1) ? + 4 :);
+            return ReadBytes(ReadInt());
         }
 
         public byte[] ReadBytes(int length)
