@@ -1,4 +1,4 @@
-﻿/*
+/*
 MIT License
 
 Copyright (c) 2017 Robert Lodico
@@ -74,73 +74,65 @@ namespace Orion.IO
         #endregion Utility
 
         #region Read
-        public virtual bool ReadBool(long position = -1)
+        public virtual bool ReadBool()
         {
-            return BitConverter.ToBoolean(ReadBytes(sizeof(bool), position), 0);
+            return BitConverter.ToBoolean(ReadBytes(sizeof(bool)), 0);
         }
 
-        public virtual bool Read(ref bool value, long position = -1)
+        public virtual bool Read(ref bool value)
         {
-            return (value = ReadBool(position));
+            return (value = ReadBool());
         }
 
-        public virtual byte ReadByte(long position = -1)
+        public virtual byte ReadByte()
         {
-            var currentPosition = InternalBuffer.Position;
-            if (position > -1) { InternalBuffer.Position = position; }
-            byte value = (byte)(InternalBuffer.ReadByte() & 0xFF);
-            if (position > -1) { InternalBuffer.Position = currentPosition; }
-
-            return value;
+            return (byte)(InternalBuffer.ReadByte() & 0xFF);
         }
 
-        public virtual byte Read(ref byte value, long position = -1)
+        public virtual byte Read(ref byte value)
         {
-            return (value = ReadByte(position));
+            return (value = ReadByte());
         }
 
-        public virtual byte[] ReadBytes(long position = -1)
+        public virtual byte[] ReadBytes()
         {
-            return ReadBytes(ReadInt(position), (position > -1) ? position + 4 : position);
+            return ReadBytes(ReadInt());
         }
 
-        public virtual byte[] ReadBytes(int length, long position = -1)
+        public virtual byte[] ReadBytes(int length)
         {
-            var currentPosition = InternalBuffer.Position;
-            if (position > -1) { InternalBuffer.Position = position; }
             byte[] buffer = new byte[length];
             if (length != InternalBuffer.Read(buffer, 0, length))
             {
                 throw new OutOfMemoryException();
             }
-            if (position > -1) { InternalBuffer.Position = currentPosition; }
 
             return buffer;
         }
 
-        public virtual byte[] Read(ref byte[] value, long position = -1)
+        public virtual byte[] Read(ref byte[] value)
         {
-            return ReadBytes(position);
+            return ReadBytes();
         }
 
-        public virtual byte[] Read(ref byte[] value, int length, long position = -1)
+        public virtual byte[] Read(ref byte[] value, int length)
         {
-            return ReadBytes(length, position);
+            return ReadBytes(length);
         }
 
-        public virtual char ReadChar(long position = -1)
+        public virtual char ReadChar()
         {
-            return BitConverter.ToChar(ReadBytes(sizeof(char), position), 0);
+            return BitConverter.ToChar(ReadBytes(sizeof(char)), 0);
         }
 
-        public virtual char Read(ref char value, long position = -1)
+        public virtual char Read(ref char value)
         {
-            return (value = ReadChar(position));
+            return (value = ReadChar());
         }
 
-        public virtual decimal ReadDecimal(long position = -1)
+        public virtual decimal ReadDecimal()
         {
-            var bytes = ReadBytes(16, position);
+            var bytes = ReadBytes(16);
             return new decimal(new int[] {
                 BitConverter.ToInt32(bytes, 0),
                 BitConverter.ToInt32(bytes, 4),
@@ -149,143 +141,140 @@ namespace Orion.IO
             });
         }
 
-        public virtual decimal Read(ref decimal value, long position = -1)
+        public virtual decimal Read(ref decimal value)
         {
-            return (value = ReadDecimal(position));
+            return (value = ReadDecimal());
         }
 
-        public virtual double ReadDouble(long position = -1)
+        public virtual double ReadDouble()
         {
-            return (BitConverter.ToDouble(ReadBytes(sizeof(double), position), 0));
+            return (BitConverter.ToDouble(ReadBytes(sizeof(double)), 0));
         }
 
-        public virtual double Read(ref double value, long position = -1)
+        public virtual double Read(ref double value)
         {
-            return (value = BitConverter.ToDouble(ReadBytes(sizeof(double), position), 0));
+            return (value = BitConverter.ToDouble(ReadBytes(sizeof(double)), 0));
         }
 
-        public virtual float ReadFloat(long position = -1)
+        public virtual float ReadFloat()
         {
-            return (BitConverter.ToSingle(ReadBytes(sizeof(float), position), 0));
+            return (BitConverter.ToSingle(ReadBytes(sizeof(float)), 0));
         }
 
-        public virtual float Read(ref float value, long position = -1)
+        public virtual float Read(ref float value)
         {
-            return (value = BitConverter.ToSingle(ReadBytes(sizeof(float), position), 0));
+            return (value = BitConverter.ToSingle(ReadBytes(sizeof(float)), 0));
         }
 
-        public virtual int ReadInt(long position = -1)
+        public virtual int ReadInt()
         {
-            return (BitConverter.ToInt32(ReadBytes(sizeof(int), position), 0));
+            return (BitConverter.ToInt32(ReadBytes(sizeof(int)), 0));
         }
 
-        public virtual int Read(ref int value, long position = -1)
+        public virtual int Read(ref int value)
         {
-            return (value = BitConverter.ToInt32(ReadBytes(sizeof(int), position), 0));
+            return (value = BitConverter.ToInt32(ReadBytes(sizeof(int)), 0));
         }
 
-        public virtual long ReadLong(long position = -1)
+        public virtual long ReadLong()
         {
-            return (BitConverter.ToInt64(ReadBytes(sizeof(long), position), 0));
+            return (BitConverter.ToInt64(ReadBytes(sizeof(long)), 0));
         }
 
-        public virtual long Read(ref long value, long position = -1)
+        public virtual long Read(ref long value)
         {
-            return (value = BitConverter.ToInt64(ReadBytes(sizeof(long), position), 0));
+            return (value = BitConverter.ToInt64(ReadBytes(sizeof(long)), 0));
         }
 
-        public virtual short ReadShort(long position = -1)
+        public virtual short ReadShort()
         {
-            return (BitConverter.ToInt16(ReadBytes(sizeof(short), position), 0));
+            return (BitConverter.ToInt16(ReadBytes(sizeof(short)), 0));
         }
 
-        public virtual short Read(ref short value, long position = -1)
+        public virtual short Read(ref short value)
         {
-            return (value = BitConverter.ToInt16(ReadBytes(sizeof(short), position), 0));
+            return (value = BitConverter.ToInt16(ReadBytes(sizeof(short)), 0));
         }
 
-        public virtual sbyte ReadSByte(long position = -1)
+        public virtual sbyte ReadSByte()
         {
-            return ((sbyte)ReadByte(position));
+            return ((sbyte)ReadByte());
         }
 
-        public virtual sbyte Read(ref sbyte value, long position = -1)
+        public virtual sbyte Read(ref sbyte value)
         {
-            return (value = (sbyte)ReadByte(position));
+            return (value = (sbyte)ReadByte());
         }
 
-        public virtual uint ReadUInt(long position = -1)
+        public virtual uint ReadUInt()
         {
-            return (BitConverter.ToUInt16(ReadBytes(sizeof(uint), position), 0));
+            return (BitConverter.ToUInt16(ReadBytes(sizeof(uint)), 0));
         }
 
-        public virtual uint Read(ref uint value, long position = -1)
+        public virtual uint Read(ref uint value)
         {
-            return (value = BitConverter.ToUInt16(ReadBytes(sizeof(uint), position), 0));
+            return (value = BitConverter.ToUInt16(ReadBytes(sizeof(uint)), 0));
         }
 
-        public virtual ulong ReadULong(long position = -1)
+        public virtual ulong ReadULong()
         {
-            return (BitConverter.ToUInt64(ReadBytes(sizeof(ulong), position), 0));
+            return (BitConverter.ToUInt64(ReadBytes(sizeof(ulong)), 0));
         }
 
-        public virtual ulong Read(ref ulong value, long position = -1)
+        public virtual ulong Read(ref ulong value)
         {
-            return (value = BitConverter.ToUInt64(ReadBytes(sizeof(ulong), position), 0));
+            return (value = BitConverter.ToUInt64(ReadBytes(sizeof(ulong)), 0));
         }
 
-        public virtual ushort ReadUShort(long position = -1)
+        public virtual ushort ReadUShort()
         {
-            return BitConverter.ToUInt16(ReadBytes(sizeof(ushort), position), 0);
+            return BitConverter.ToUInt16(ReadBytes(sizeof(ushort)), 0);
         }
 
-        public virtual ushort Read(ref ushort value, long position = -1)
+        public virtual ushort Read(ref ushort value)
         {
-            return (value = ReadUShort(position));
+            return (value = ReadUShort());
         }
 
-        public virtual string ReadString(long position = -1)
+        public virtual string ReadString()
         {
-            return Encoding.UTF8.GetString(ReadBytes(position));
+            return Encoding.UTF8.GetString(ReadBytes());
         }
 
-        public virtual string Read(ref string value, long position = -1)
+        public virtual string Read(ref string value)
         {
-            return (value = ReadString(position));
+            return (value = ReadString());
         }
         #endregion Read
 
         #region Write
-        public void Write(bool value, long position = -1)
+        public void Write(bool value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(bool), position);
+            Write(BitConverter.GetBytes(value), sizeof(bool));
         }
 
-        public virtual void Write(byte value, long position = -1)
+        public virtual void Write(byte value)
         {
-            Write(new byte[] { value }, 1, position);
+            Write(new byte[] { value }, 1);
         }
 
-        public virtual void Write(byte[] value, long position = -1)
+        public virtual void Write(byte[] value)
         {
-            Write(value.Length, position);
-            Write(value, value.Length, (position > -1) ? position + 4 : InternalBuffer.Position);
+            Write(value.Length);
+            Write(value, value.Length);
         }
 
-        public void Write(byte[] value, int length, long position = -1)
+        public void Write(byte[] value, int length)
         {
-            var currentPosition = InternalBuffer.Position;
-            if (position > -1) { InternalBuffer.Position = position; }
             InternalBuffer.Write(value, 0, length);
-            if (position > -1) { InternalBuffer.Position = currentPosition; }
         }
 
-        public virtual void Write(char value, long position = -1)
+        public virtual void Write(char value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(char), position);
+            Write(BitConverter.GetBytes(value), sizeof(char));
         }
 
-        public virtual void Write(decimal value, long position = -1)
+        public virtual void Write(decimal value)
         {
             var intBuffer = decimal.GetBits(value);
 
@@ -295,58 +284,58 @@ namespace Orion.IO
             Buffer.BlockCopy(BitConverter.GetBytes(intBuffer[2]), 0, bytes, 8, 4);
             Buffer.BlockCopy(BitConverter.GetBytes(intBuffer[3]), 0, bytes, 12, 4);
 
-            Write(bytes, sizeof(int) * 4, position);
+            Write(bytes, sizeof(int) * 4);
         }
 
-        public virtual void Write(double value, long position = -1)
+        public virtual void Write(double value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(double), position);
+            Write(BitConverter.GetBytes(value), sizeof(double));
         }
 
-        public virtual void Write(float value, long position = -1)
+        public virtual void Write(float value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(float), position);
+            Write(BitConverter.GetBytes(value), sizeof(float));
         }
 
-        public virtual void Write(int value, long position = -1)
+        public virtual void Write(int value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(int), position);
+            Write(BitConverter.GetBytes(value), sizeof(int));
         }
 
-        public virtual void Write(long value, long position = -1)
+        public virtual void Write(long value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(long), position);
+            Write(BitConverter.GetBytes(value), sizeof(long));
         }
 
-        public virtual void Write(sbyte value, long position = -1)
+        public virtual void Write(sbyte value)
         {
-            Write((byte)value, position);
+            Write((byte)value);
         }
 
-        public virtual void Write(short value, long position = -1)
+        public virtual void Write(short value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(short), position);
+            Write(BitConverter.GetBytes(value), sizeof(short));
         }
 
-        public virtual void Write(uint value, long position = -1)
+        public virtual void Write(uint value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(uint), position);
+            Write(BitConverter.GetBytes(value), sizeof(uint));
         }
 
-        public virtual void Write(ulong value, long position = -1)
+        public virtual void Write(ulong value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(ulong), position);
+            Write(BitConverter.GetBytes(value), sizeof(ulong));
         }
 
-        public virtual void Write(ushort value, long position = -1)
+        public virtual void Write(ushort value)
         {
-            Write(BitConverter.GetBytes(value), sizeof(ushort), position);
+            Write(BitConverter.GetBytes(value), sizeof(ushort));
         }
 
-        public virtual void Write(string value, long position = -1)
+        public virtual void Write(string value)
         {
             var data = Encoding.UTF8.GetBytes(value);
-            Write(data, position);
+            Write(data);
         }
         #endregion Write
 
