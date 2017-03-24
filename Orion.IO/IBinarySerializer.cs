@@ -43,22 +43,22 @@ namespace Orion.IO
         ushort ReadUShort();
         string ReadString();
 
-        bool Read(ref bool value);
-        byte Read(ref byte value);
-        byte[] Read(ref byte[] value);
-        byte[] Read(ref byte[] value, int length);
-        char Read(ref char value);
-        decimal Read(ref decimal value);
-        double Read(ref double value);
-        float Read(ref float value);
-        int Read(ref int value);
-        long Read(ref long value);
-        sbyte Read(ref sbyte value);
-        short Read(ref short value);
-        uint Read(ref uint value);
-        ulong Read(ref ulong value);
-        ushort Read(ref ushort value);
-        string Read(ref string value);
+        bool Read(out bool value);
+        byte Read(out byte value);
+        byte[] Read(out byte[] value);
+        byte[] Read(out byte[] value, int length);
+        char Read(out char value);
+        decimal Read(out decimal value);
+        double Read(out double value);
+        float Read(out float value);
+        int Read(out int value);
+        long Read(out long value);
+        sbyte Read(out sbyte value);
+        short Read(out short value);
+        uint Read(out uint value);
+        ulong Read(out ulong value);
+        ushort Read(out ushort value);
+        string Read(out string value);
 
         void Write(bool value);
         void Write(byte value);

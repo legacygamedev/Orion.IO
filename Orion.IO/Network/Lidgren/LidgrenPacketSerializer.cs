@@ -37,12 +37,12 @@ namespace Orion.IO.Network.Lidgren
             Message = message;
         }
 
-        public bool Read(ref bool value)
+        public bool Read(out bool value)
         {
             return (value = ReadBool());
         }
 
-        public byte Read(ref byte value)
+        public byte Read(out byte value)
         {
             if (!Message.ReadByte(out value))
             {
@@ -52,12 +52,12 @@ namespace Orion.IO.Network.Lidgren
             return value;
         }
 
-        public byte[] Read(ref byte[] value)
+        public byte[] Read(out byte[] value)
         {
-            return Read(ref value, ReadInt());
+            return Read(out value, ReadInt());
         }
 
-        public byte[] Read(ref byte[] value, int length)
+        public byte[] Read(out byte[] value, int length)
         {
             if (!Message.ReadBytes(length, out value))
             {
@@ -67,27 +67,27 @@ namespace Orion.IO.Network.Lidgren
             return value;
         }
 
-        public char Read(ref char value)
+        public char Read(out char value)
         {
             return (value = ReadChar());
         }
 
-        public decimal Read(ref decimal value)
+        public decimal Read(out decimal value)
         {
             return (value = ReadDecimal());
         }
 
-        public double Read(ref double value)
+        public double Read(out double value)
         {
             return (value = ReadDouble());
         }
 
-        public float Read(ref float value)
+        public float Read(out float value)
         {
             return (value = ReadFloat());
         }
 
-        public int Read(ref int value)
+        public int Read(out int value)
         {
             if (!Message.ReadInt32(out value))
             {
@@ -97,22 +97,22 @@ namespace Orion.IO.Network.Lidgren
             return value;
         }
 
-        public long Read(ref long value)
+        public long Read(out long value)
         {
             return (value = ReadLong());
         }
 
-        public sbyte Read(ref sbyte value)
+        public sbyte Read(out sbyte value)
         {
             return (value = ReadSByte());
         }
 
-        public short Read(ref short value)
+        public short Read(out short value)
         {
             return (value = ReadShort());
         }
 
-        public uint Read(ref uint value)
+        public uint Read(out uint value)
         {
             if (!Message.ReadUInt32(out value))
             {
@@ -122,17 +122,17 @@ namespace Orion.IO.Network.Lidgren
             return value;
         }
 
-        public ulong Read(ref ulong value)
+        public ulong Read(out ulong value)
         {
             return (value = ReadULong());
         }
 
-        public ushort Read(ref ushort value)
+        public ushort Read(out ushort value)
         {
             return (value = ReadUShort());
         }
 
-        public string Read(ref string value)
+        public string Read(out string value)
         {
             return (value = ReadString());
         }

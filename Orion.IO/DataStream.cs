@@ -71,37 +71,28 @@ namespace Orion.IO
                 InternalBuffer.Position = 0;
             }
         }
+
+        public override void Close()
+        {
+            InternalBuffer?.Close();
+            base.Close();
+        }
         #endregion Utility
 
         #region Read
-        public virtual bool ReadBool()
-        {
-            return BitConverter.ToBoolean(ReadBytes(sizeof(bool)), 0);
-        }
+        public virtual bool ReadBool() => BitConverter.ToBoolean(ReadBytes(sizeof(bool)), 0);
 
-        public virtual bool Read(ref bool value)
-        {
-            return (value = ReadBool());
-        }
+        public virtual bool Read(out bool value) => (value = ReadBool());
 
-        public virtual byte ReadByte()
-        {
-            return (byte)(InternalBuffer.ReadByte() & 0xFF);
-        }
+        public virtual byte ReadByte() => (byte)(InternalBuffer.ReadByte() & 0xFF);
 
-        public virtual byte Read(ref byte value)
-        {
-            return (value = ReadByte());
-        }
+        public virtual byte Read(out byte value) => (value = ReadByte());
 
-        public virtual byte[] ReadBytes()
-        {
-            return ReadBytes(ReadInt());
-        }
+        public virtual byte[] ReadBytes() => ReadBytes(ReadInt());
 
         public virtual byte[] ReadBytes(int length)
         {
-            byte[] buffer = new byte[length];
+            var buffer = new byte[length];
             if (length != InternalBuffer.Read(buffer, 0, length))
             {
                 throw new OutOfMemoryException();
@@ -110,25 +101,13 @@ namespace Orion.IO
             return buffer;
         }
 
-        public virtual byte[] Read(ref byte[] value)
-        {
-            return ReadBytes();
-        }
+        public virtual byte[] Read(out byte[] value) => (value = ReadBytes());
 
-        public virtual byte[] Read(ref byte[] value, int length)
-        {
-            return ReadBytes(length);
-        }
+        public virtual byte[] Read(out byte[] value, int length) => (value = ReadBytes(length));
 
-        public virtual char ReadChar()
-        {
-            return BitConverter.ToChar(ReadBytes(sizeof(char)), 0);
-        }
+        public virtual char ReadChar() => BitConverter.ToChar(ReadBytes(sizeof(char)), 0);
 
-        public virtual char Read(ref char value)
-        {
-            return (value = ReadChar());
-        }
+        public virtual char Read(out char value) => (value = ReadChar());
 
         public virtual decimal ReadDecimal()
         {
@@ -141,110 +120,48 @@ namespace Orion.IO
             });
         }
 
-        public virtual decimal Read(ref decimal value)
-        {
-            return (value = ReadDecimal());
-        }
+        public virtual decimal Read(out decimal value) => (value = ReadDecimal());
 
-        public virtual double ReadDouble()
-        {
-            return (BitConverter.ToDouble(ReadBytes(sizeof(double)), 0));
-        }
+        public virtual double ReadDouble() => (BitConverter.ToDouble(ReadBytes(sizeof(double)), 0));
 
-        public virtual double Read(ref double value)
-        {
-            return (value = BitConverter.ToDouble(ReadBytes(sizeof(double)), 0));
-        }
+        public virtual double Read(out double value) => (value = BitConverter.ToDouble(ReadBytes(sizeof(double)), 0));
 
-        public virtual float ReadFloat()
-        {
-            return (BitConverter.ToSingle(ReadBytes(sizeof(float)), 0));
-        }
+        public virtual float ReadFloat() => (BitConverter.ToSingle(ReadBytes(sizeof(float)), 0));
 
-        public virtual float Read(ref float value)
-        {
-            return (value = BitConverter.ToSingle(ReadBytes(sizeof(float)), 0));
-        }
+        public virtual float Read(out float value) => (value = BitConverter.ToSingle(ReadBytes(sizeof(float)), 0));
 
-        public virtual int ReadInt()
-        {
-            return (BitConverter.ToInt32(ReadBytes(sizeof(int)), 0));
-        }
+        public virtual int ReadInt() => (BitConverter.ToInt32(ReadBytes(sizeof(int)), 0));
 
-        public virtual int Read(ref int value)
-        {
-            return (value = BitConverter.ToInt32(ReadBytes(sizeof(int)), 0));
-        }
+        public virtual int Read(out int value) => (value = BitConverter.ToInt32(ReadBytes(sizeof(int)), 0));
 
-        public virtual long ReadLong()
-        {
-            return (BitConverter.ToInt64(ReadBytes(sizeof(long)), 0));
-        }
+        public virtual long ReadLong() => (BitConverter.ToInt64(ReadBytes(sizeof(long)), 0));
 
-        public virtual long Read(ref long value)
-        {
-            return (value = BitConverter.ToInt64(ReadBytes(sizeof(long)), 0));
-        }
+        public virtual long Read(out long value) => (value = BitConverter.ToInt64(ReadBytes(sizeof(long)), 0));
 
-        public virtual short ReadShort()
-        {
-            return (BitConverter.ToInt16(ReadBytes(sizeof(short)), 0));
-        }
+        public virtual short ReadShort() => (BitConverter.ToInt16(ReadBytes(sizeof(short)), 0));
 
-        public virtual short Read(ref short value)
-        {
-            return (value = BitConverter.ToInt16(ReadBytes(sizeof(short)), 0));
-        }
+        public virtual short Read(out short value) => (value = BitConverter.ToInt16(ReadBytes(sizeof(short)), 0));
 
-        public virtual sbyte ReadSByte()
-        {
-            return ((sbyte)ReadByte());
-        }
+        public virtual sbyte ReadSByte() => ((sbyte)ReadByte());
 
-        public virtual sbyte Read(ref sbyte value)
-        {
-            return (value = (sbyte)ReadByte());
-        }
+        public virtual sbyte Read(out sbyte value) => (value = (sbyte)ReadByte());
 
-        public virtual uint ReadUInt()
-        {
-            return (BitConverter.ToUInt16(ReadBytes(sizeof(uint)), 0));
-        }
+        public virtual uint ReadUInt() => (BitConverter.ToUInt16(ReadBytes(sizeof(uint)), 0));
 
-        public virtual uint Read(ref uint value)
-        {
-            return (value = BitConverter.ToUInt16(ReadBytes(sizeof(uint)), 0));
-        }
+        public virtual uint Read(out uint value) => (value = BitConverter.ToUInt16(ReadBytes(sizeof(uint)), 0));
 
-        public virtual ulong ReadULong()
-        {
-            return (BitConverter.ToUInt64(ReadBytes(sizeof(ulong)), 0));
-        }
+        public virtual ulong ReadULong() => (BitConverter.ToUInt64(ReadBytes(sizeof(ulong)), 0));
 
-        public virtual ulong Read(ref ulong value)
-        {
-            return (value = BitConverter.ToUInt64(ReadBytes(sizeof(ulong)), 0));
-        }
+        public virtual ulong Read(out ulong value) => (value = BitConverter.ToUInt64(ReadBytes(sizeof(ulong)), 0));
 
-        public virtual ushort ReadUShort()
-        {
-            return BitConverter.ToUInt16(ReadBytes(sizeof(ushort)), 0);
-        }
+        public virtual ushort ReadUShort() => BitConverter.ToUInt16(ReadBytes(sizeof(ushort)), 0);
 
-        public virtual ushort Read(ref ushort value)
-        {
-            return (value = ReadUShort());
-        }
+        public virtual ushort Read(out ushort value) => (value = ReadUShort());
 
-        public virtual string ReadString()
-        {
-            return Encoding.UTF8.GetString(ReadBytes());
-        }
+        public virtual string ReadString() => Encoding.UTF8.GetString(ReadBytes());
 
-        public virtual string Read(ref string value)
-        {
-            return (value = ReadString());
-        }
+        public virtual string Read(out string value) => (value = ReadString());
+
         #endregion Read
 
         #region Write

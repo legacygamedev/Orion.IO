@@ -65,84 +65,84 @@ namespace Orion.IO.Network.Packets
             return true;
         }
 
-        public bool Read(ref bool value)
+        public bool Read(out bool value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public byte Read(ref byte value)
+        public byte Read(out byte value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public byte[] Read(ref byte[] value)
+        public byte[] Read(out byte[] value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public byte[] Read(ref byte[] value, int length)
+        public byte[] Read(out byte[] value, int length)
         {
-            return Buffer.Read(ref value, length);
+            return Buffer.Read(out value, length);
         }
 
-        public char Read(ref char value)
+        public char Read(out char value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public decimal Read(ref decimal value)
+        public decimal Read(out decimal value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public double Read(ref double value)
+        public double Read(out double value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public float Read(ref float value)
+        public float Read(out float value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public int Read(ref int value)
+        public int Read(out int value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public long Read(ref long value)
+        public long Read(out long value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public sbyte Read(ref sbyte value)
+        public sbyte Read(out sbyte value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public short Read(ref short value)
+        public short Read(out short value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public uint Read(ref uint value)
+        public uint Read(out uint value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public ulong Read(ref ulong value)
+        public ulong Read(out ulong value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public ushort Read(ref ushort value)
+        public ushort Read(out ushort value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
-        public string Read(ref string value)
+        public string Read(out string value)
         {
-            return Buffer.Read(ref value);
+            return Buffer.Read(out value);
         }
 
         public bool ReadBool()

@@ -29,6 +29,8 @@ namespace Orion.IO
 {
     public class CompressedDataStream : DataStream
     {
+        private readonly Stream mWrappedStream;
+
         public CompressedDataStream(int capacity = 0) : this(new MemoryStream(capacity))
         {
             /* Do nothing else. */
@@ -36,7 +38,13 @@ namespace Orion.IO
 
         public CompressedDataStream(Stream internalStream, CompressionMode mode = CompressionMode.Compress) : base(new GZipStream(internalStream, mode))
         {
-            /* Do nothing else. */
+            mWrappedStream = internalStream;
+        }
+
+        public override void Close()
+        {
+            base.Close();
+            mWrappedStream?.Close();
         }
     }
 }
