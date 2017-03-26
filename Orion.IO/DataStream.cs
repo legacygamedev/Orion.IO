@@ -172,7 +172,7 @@ namespace Orion.IO
 
         public virtual void Write(byte value)
         {
-            Write(new byte[] { value }, 1);
+            InternalBuffer.WriteByte(value);
         }
 
         public virtual void Write(byte[] value)
